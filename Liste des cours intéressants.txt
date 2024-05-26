@@ -1,0 +1,9 @@
+Stanford :
+CS229
+CS230
+
+MIT : 
+6.S191
+
+Berkeley : 
+CS 198-126
