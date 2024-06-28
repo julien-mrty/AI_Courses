@@ -22,6 +22,7 @@ significantly improve your algorithm performance, then you can spend a bunch of 
 With Laplace smoothing
 """
 
+"""
 number_of_classes = 2  # Here it is spam or non-spam
 
 
@@ -59,9 +60,18 @@ class NaiveBayesClassifier:
 
 
 categories = ['rec.autos', 'sci.space']  # Using two categories to simulate spam vs. non-spam
-newsgroups = fetch_20newsgroups(subset='train', categories=categories)
-X_raw = newsgroups.data
-y = (newsgroups.target == 1).astype(int)  # Arbitrarily consider 'sci.space' as spam (1)
+
+try:
+    print("fetch_20newsgroups...")
+    newsgroups = fetch_20newsgroups(subset='train', categories=categories, remove=('headers', 'footers', 'quotes'),
+                                    shuffle=True, random_state=42)
+    print("ended")
+    X_raw = newsgroups.data[:20]  # Limit to first 20 documents for faster processing
+    y = (newsgroups.target[:20] == 1).astype(int)  # Arbitrarily consider 'sci.space' as spam (1)
+except Exception as e:
+    print(f"An error occurred: {e}")
+    exit(1)
+
 
 # Convert text data to feature vectors
 vectorizer = CountVectorizer(binary=True)
@@ -80,15 +90,64 @@ y_pred = nb.predict(X_test)
 # Calculate accuracy
 accuracy = accuracy_score(y_test, y_pred)
 print(f'Accuracy: {accuracy * 100:.2f}%')
-
-
-""" 
-Multinomial event model
 """
 
+# Define number of classes
+number_of_classes = 2  # Here it is spam or non-spam
 
-""" Support Vector Machine """
-"""
-Support Vector Machine or not as effective as Neural Network for many problems, but SVM or much more simple to use than 
-NN. The isn't many parameters to customize.
-"""
+class NaiveBayesClassifier:
+    def fit(self, X, y):
+        # Number of documents
+        n_docs = X.shape[0]
+        # Number of words in the vocabulary
+        n_words = X.shape[1]
+
+        # Calculate phi_y
+        self.phi_y = np.mean(y)
+
+        # Calculate phi_j|y=1 and phi_j|y=0 with Laplace Smoothing
+        self.phi_j_y1 = (X[y == 1].sum(axis=0) + 1) / (y.sum() + number_of_classes)
+        self.phi_j_y0 = (X[y == 0].sum(axis=0) + 1) / ((n_docs - y.sum()) + number_of_classes)
+
+    def predict(self, X):
+        # Calculate log probabilities
+        log_phi_j_y1 = np.log(self.phi_j_y1)
+        log_phi_j_y0 = np.log(self.phi_j_y0)
+        log_1_minus_phi_j_y1 = np.log(1 - self.phi_j_y1)
+        log_1_minus_phi_j_y0 = np.log(1 - self.phi_j_y0)
+
+        # Calculate log likelihoods
+        log_likelihood_y1 = X @ log_phi_j_y1.T + (1 - X) @ log_1_minus_phi_j_y1.T
+        log_likelihood_y0 = X @ log_phi_j_y0.T + (1 - X) @ log_1_minus_phi_j_y0.T
+
+        # Calculate log posterior probabilities
+        log_posterior_y1 = log_likelihood_y1 + np.log(self.phi_y)
+        log_posterior_y0 = log_likelihood_y0 + np.log(1 - self.phi_y)
+
+        # Predict y
+        return (log_posterior_y1 > log_posterior_y0).astype(int)
+
+# Generate synthetic data
+np.random.seed(42)  # For reproducibility
+n_samples = 100  # Number of samples
+n_features = 20  # Number of features (words in vocabulary)
+
+# Generate random binary features
+X = np.random.randint(2, size=(n_samples, n_features))
+
+# Generate random binary labels
+y = np.random.randint(2, size=n_samples)
+
+# Split the data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Train the Naive Bayes classifier
+nb = NaiveBayesClassifier()
+nb.fit(X_train, y_train)
+
+# Predict on the test set
+y_pred = nb.predict(X_test)
+
+# Calculate accuracy
+accuracy = accuracy_score(y_test, y_pred)
+print(f'Accuracy: {accuracy * 100:.2f}%')
