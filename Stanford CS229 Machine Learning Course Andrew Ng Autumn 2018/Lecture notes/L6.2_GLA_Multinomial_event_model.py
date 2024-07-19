@@ -2,15 +2,16 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
+
+"""
+I) Supervised learning
+Chapter 4
+Generative Learning Algorithm
+"""
+
+
 """
 Multinomial event model
-"""
-
-
-""" Support Vector Machine """
-"""
-Support Vector Machine or not as effective as Neural Network for many problems, but SVM is much more simple to use than 
-NN. There isn't many parameters to customize like in NN, it is more straightforward.
 """
 
 # Define number of classes

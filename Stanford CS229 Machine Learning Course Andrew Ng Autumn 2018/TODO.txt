@@ -1,0 +1,5 @@
+- Support Vector Machine, partie optionnelle non lue 
+
+- Remettre de l'ordre dans les notes de cours python. Ajouter le nom du chapitre dans le nom du fichier. Dans le fichier indiquer le chapitre et sous chapitre à chaque fois
+- push les modif
+- Commencer partie Deep Learning
