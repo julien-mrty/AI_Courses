@@ -1,19 +1,7 @@
-import numpy as np
-
-
 """
 III) Generalization and regularization
 Chapter 8
 Generalization
-"""
-
-
-"""
-Definition of bias in ML : A learning algorithm as very strong preconceptions that the data could be fit
-by a certain family (ex : linear function or linear model family's).
-
-Definition of variance in ML : An algorithm which have a high variance, will fit a totally different function if the
-data used to train the algorithm is slightly different. There is a lot of variability in the prediction of the algorithm
 """
 
 
@@ -57,4 +45,53 @@ dataset increases. There is nothing we can do about the first term σ2 as we can
 Finally, we note that the bias-variance decomposition for classification is much less clear than for regression 
 problems. There have been several proposals, but there is as yet no agreement on what is the “right” and/or the most 
 useful formalism
+"""
+
+"""
+How to fight variance ?
+1) Increase the number of data
+2) Add regularization
+
+
+Example : 
+If you have a low bias high variance algorithm, you can add regularization. By adding regularization, you may end up
+with a small (a bit more than low) bias, low variance algorithm.
+"""
+
+"""
+Model prediction error decomposition
+
+Check lecture's 9 screenshot.
+
+You can decompose the model prediction error in 3 parts :
+1 - The Bayes error / Irreducible error. The difference between the perfect hypothesis and the best possible hypothesis.
+2 - Approximation error (due to the class of models' chosen). It is the difference the best hypothesis of our model and 
+the best hypothesis possible.
+3 - Estimation error (due to limited data). Given the data that we have, it is the difference between the best 
+hypothesis of our model and the average hypothesis of our model.
+
+=== The average error of our model = Estimation error + Approximation error + Irreducible error ===
+The average error of our model is also called the generalization error.
+
+The irreducible error can't be decreased. Then you make some decisions about what class/type of models you want to use
+(neural network, logistic regression, etc...), this is the approximation error. Finally you work with limited data and
+possible nuances of your algorithm that causes the estimation error.
+
+
+- Estimation error = Estimation variance + Estimation bias 
+- Variance = Estimation variance
+- Bias = Estimation bias + Approximation error
+
+Then we get :
+=== The average error of our model = Variance + Bias + Irreducible error ===
+
+The bias globally try to capture why, the average hypothesis of our model is far from the best possible hypothesis.
+The variance almost allways due to having small dataset.
+"""
+
+
+"""
+How to fight high bias ?
+
+Make H bigger (check lecture's screenshot) -> reduce your bias but increase your variance.
 """
