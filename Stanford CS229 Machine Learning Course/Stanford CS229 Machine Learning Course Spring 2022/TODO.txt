@@ -2,6 +2,10 @@
 
 
 REFACTOR LE PROJET AVEC LES COURS DE 2022
-- chap 7 deep learning sauté
+- vérifier que tout est ok
+
+- Next cours lecture 8 deep learning
+- Passer rapidement sur lecture 10 et 11 pour vérifier que generalization et regularization est ok
+
 - chap 9 fini. Peut passer à la lecture 9 ou manque encore du cours ?
 - Generalization 8.2 todo
