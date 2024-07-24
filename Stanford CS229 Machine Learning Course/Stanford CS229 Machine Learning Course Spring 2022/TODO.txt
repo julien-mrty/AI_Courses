@@ -1,0 +1,7 @@
+- Support Vector Machine, partie optionnelle non lu
+
+
+REFACTOR LE PROJET AVEC LES COURS DE 2022
+- chap 7 deep learning sauté
+- chap 9 fini. Peut passer à la lecture 9 ou manque encore du cours ?
+- Generalization 8.2 todo
