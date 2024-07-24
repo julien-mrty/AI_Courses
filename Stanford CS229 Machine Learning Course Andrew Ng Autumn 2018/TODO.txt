@@ -1,6 +1,0 @@
-- Support Vector Machine, partie optionnelle non lue 
-
-- chap 7 deep learning sauté
-- Prendre note sur chap 8, 
-	p122
-	Ou plutot voir chap regularization pour suivre le cours ?
