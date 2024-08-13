@@ -7,6 +7,10 @@ Chapter 7
 Deep learning
 """
 
+"""
+Neural networks
+"""
+
 
 """
 This implementation with a Neuron class do not seems relevant. It doesn't allow to use a matrix of weights in the Layer 

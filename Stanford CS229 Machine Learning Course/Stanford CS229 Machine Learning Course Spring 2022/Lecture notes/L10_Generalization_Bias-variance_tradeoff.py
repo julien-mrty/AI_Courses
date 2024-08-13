@@ -22,7 +22,7 @@ with a small (a bit more than low) bias, low variance algorithm.
 """
 Model prediction error decomposition
 
-Check lecture's 9 screenshot.
+Check lecture's 10 screenshot.
 
 You can decompose the model prediction error in 3 parts :
 1 - The Bayes error / Irreducible error. The difference between the perfect hypothesis and the best possible hypothesis.

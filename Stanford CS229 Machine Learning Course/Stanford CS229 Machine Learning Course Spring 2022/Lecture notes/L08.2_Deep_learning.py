@@ -7,6 +7,11 @@ Chapter 7
 Deep learning
 """
 
+"""
+Neural networks
+"""
+
+
 np.random.seed(42)  # For reproducibility
 
 
@@ -86,7 +91,7 @@ def main():
     input_feature = np.ones(3)
     fullyConnectedNN = FullyConnectedNeuralNetwork(3, 3, [3, 2, 1])
     fullyConnectedNN.initialize_layers()
-    print(fullyConnectedNN.forward_propagation(input_feature))
+    print("Prediction : ", fullyConnectedNN.forward_propagation(input_feature)[0])
 
 
 if __name__ == "__main__":

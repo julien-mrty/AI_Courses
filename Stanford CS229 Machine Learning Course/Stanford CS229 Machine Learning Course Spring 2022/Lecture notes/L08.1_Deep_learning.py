@@ -6,6 +6,11 @@ Deep learning
 
 
 """
+Neural networks
+"""
+
+
+"""
 Reminder :
 Difference between Gradient Descent dans Stochastic Gradient Descent. With Gradient Descent, the parameters' update is 
 performed after reviewing the whole dataset, it is also called Batch Gradient Descent. With Stochastic Gradient Descent,

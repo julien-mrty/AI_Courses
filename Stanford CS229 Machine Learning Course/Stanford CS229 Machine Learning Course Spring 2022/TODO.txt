@@ -1,8 +1,6 @@
 - Support Vector Machine, partie optionnelle non lu
 
 
-- Finir la lecture de la première partie du cours Deep learning
-- Next cours lecture 9 deep learning, notes à lire
-
+- L9 backpropagation : essayer mon NN avec des données non linéaire
+- Generalization 8.2 todo -> Prendre des notes
 - Passer rapidement sur lecture 10 et 11 pour vérifier que generalization et regularization est ok
-- Generalization 8.2 todo
