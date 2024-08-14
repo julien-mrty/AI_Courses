@@ -1,6 +1,6 @@
-- Support Vector Machine, partie optionnelle non lu
+- 6.2-8 Support Vector Machine, partie optionnelle non lu
+- 8.3 Sample complexity bounds, partie optionnelle non lu
 
 
-- L9 backpropagation : essayer mon NN avec des données non linéaire
-- Generalization 8.2 todo -> Prendre des notes
 - Passer rapidement sur lecture 10 et 11 pour vérifier que generalization et regularization est ok
+- Next lecture : 12

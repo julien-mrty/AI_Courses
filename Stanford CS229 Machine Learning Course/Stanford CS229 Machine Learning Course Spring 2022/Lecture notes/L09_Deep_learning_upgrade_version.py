@@ -116,32 +116,26 @@ class FullyConnectedNeuralNetwork:
                                                                    f"{self.input_feature_size} size, but has "
                                                                    f"{input_feature.shape[0]} size.")
 
-        # First compute with the input feature
-        previous_layer_output = self.layers[0].layer_forward_propagation(input_feature)
-        self.layers_output.insert(0, previous_layer_output)
-
-        # Skip the first layer because it is already computed
-        for i, layer in enumerate(self.layers[1:], start=1):
+        previous_layer_output = input_feature
+        for layer in self.layers:
             previous_layer_output = layer.layer_forward_propagation(previous_layer_output)
-            self.layers_output.insert(i, previous_layer_output)
 
         # Return the output of the last layer
         return previous_layer_output
 
     def backpropagation(self, input_feature, target_output):
-        # Initialization of the deltas' list
+        # Initialize delta
         deltas = [0] * self.num_layer
 
-        # Get the model hypothesis
-        model_hypothesis = float(self.layers_output[-1][0])
-        deltas[-1] = np.array([model_hypothesis - target_output])
+        # Get the model hypothesis and compute the last gradient
+        last_layer = self.layers[-1]
+        deltas[-1] = last_layer.a - target_output
 
-        # Calculate deltas for the hidden layers
-        for i in range(len(self.layers) - 2, -1, -1):
+        # Calculate the deltas
+        for i in range(self.num_layer - 2, -1, -1):
             deltas[i] = (np.dot(np.transpose(self.layers[i + 1].weights), deltas[i + 1]) *
                          self.activation_function_prime(self.layers[i].z))
 
-        # Update weights and biases
         for i in range(len(self.layers)):
             # Compute the gradient for weights and biases
             if i == 0:
@@ -170,14 +164,14 @@ class FullyConnectedNeuralNetwork:
             self.backpropagation(input_feature[i], target_output[i])
 
     def train(self, number_of_epochs, input_feature, target_output):
-        for i in range(number_of_epochs):
+        for _ in range(number_of_epochs):
             self.train_one_epoch(input_feature, target_output)
 
 
 def main():
     """ Hyperparameters """
     learning_rate = 0.001
-    number_of_epochs = 1000
+    number_of_epochs = 10
 
 
     """ Samples """
