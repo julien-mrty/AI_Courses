@@ -4,3 +4,5 @@
 
 - Passer rapidement sur lecture 10 et 11 pour vérifier que generalization et regularization est ok
 - Next lecture : 12
+	Finir EM algo
+	
