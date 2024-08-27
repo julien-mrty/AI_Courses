@@ -1,6 +1,4 @@
 import numpy as np
-from fontTools.afmLib import componentRE
-from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
 
 
@@ -8,6 +6,22 @@ import matplotlib.pyplot as plt
 IV) Unsupervised learning
 Chapter 12
 Principal component analysis (PCA)
+"""
+
+
+"""
+PCA algo is also referred as dimensionality reduction algo. The first k vectors are called the principal components of 
+the data.
+Applications :
+- Visualize higher dimension data
+- Pre-process data to reduce its dimension (reduce the complexity of the following calculus)
+
+Example : Face images -> eigenfaces method. Reduce the dimension of the 100x100 pixels image. Using PCA to represent the
+image in a much lower dimensionality. Hope that the principal component found retained the interesting, systematic 
+variations between faces that capture what a person really looks like, but not the noise in the images introduced by 
+minor lighting variations, slightly different imaging conditions, and so on. 
+We then measure distances between faces i and j by working in the reduced dimension, and computing norm(y(i) - y(j))_2. 
+This resulted in a surprisingly good face-matching and retrieval algorithm.
 """
 
 
@@ -98,8 +112,6 @@ def principal_components_analysis(data, k):
     # Reordering eigenvectors
     # Each column is an eigenvector corresponding to the eigenvalues
     eigenvectors = eigenvectors[:, sorted_indices]
-    # Reordering Eigenvalues
-    eigenvalues = eigenvalues[sorted_indices]
 
     # Select the top k eigenvectors
     top_k_eigenvectors = eigenvectors[:, :k]
@@ -116,12 +128,12 @@ def principal_components_analysis(data, k):
 
     # For a more readable display
     y = np.array(y)
-    print(y)
+
+    return y
 
 
 def main():
-    # The reduced dimension of the data
-    k = 2
+    k = 2 # The reduced dimension of the data
 
     mean = np.array([2, 1, 3])  # Mean vector
     cov = np.array([[1, 0.8, 0.7],  # Covariance matrix
@@ -131,9 +143,10 @@ def main():
 
     correlated_data = generate_correlated_data(mean, cov, n_samples)
 
-    principal_components_analysis(correlated_data, k)
+    y = principal_components_analysis(correlated_data, k)
 
-    #plot_3D_data(correlated_data)
+    plot_3D_data(correlated_data)
+    plot_2D_data(y)
 
 
 if __name__ == "__main__":
