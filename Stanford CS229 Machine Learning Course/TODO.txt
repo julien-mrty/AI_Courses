@@ -1,0 +1,8 @@
+- 6.2-8 Support Vector Machine, partie optionnelle non lu
+- 8.3 Sample complexity bounds, partie optionnelle non lu
+
+
+- Passer rapidement sur lecture 10 et 11 pour vérifier que generalization et regularization est ok
+- Next lecture : 12
+	Finir EM algo
+	
