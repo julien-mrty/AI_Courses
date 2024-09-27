@@ -38,13 +38,11 @@ x = np.array([[1, 0, 0],
 
 
 print("======================================================== Initial values : ")
-print("X = ", x)
-print("y = ", y)
-print("theta = ", theta)
+print("X = \n", x)
+print("y = \n", y)
+print("theta = \n", theta)
 
 learning_rate = 0.01
-
-print("\n New Y = ", y)
 
 
 """ 

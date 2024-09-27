@@ -88,6 +88,7 @@ def value_iteration(V, P, R, gamma, threshold):
 
         iteration += 1
         if delta < threshold:
+            print(f"Value iteration converged in : {iteration} iterations." )
             break
 
     return V
@@ -138,7 +139,7 @@ def policy_evaluation(policy, P, R, gamma, threshold):
     return V
 
 
-def policy_iteration(V, P, R, gamma, threshold):
+def policy_iteration(P, R, gamma, threshold):
     iteration = 0
 
     while True:
@@ -163,13 +164,14 @@ def policy_iteration(V, P, R, gamma, threshold):
         iteration += 1
 
         if policy_stable:
+            print(f"Policy iteration converged in : {iteration} iterations." )
             break
 
     return V, policy
 
 
 # Compute optimal policy and value function
-V, optimal_policy = policy_iteration(V, P, R, gamma, threshold)
+V, optimal_policy = policy_iteration(P, R, gamma, threshold)
 
 print("Optimal value function from policy computed : ", V)
 print("Optimal policy re-computed : ", optimal_policy)
