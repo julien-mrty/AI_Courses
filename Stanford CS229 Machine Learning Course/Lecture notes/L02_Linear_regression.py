@@ -3,7 +3,7 @@ import numpy as np
 
 """
 I) Supervised learning
-CHAPTER 1
+Chapter 1
 Linear regression
 """
 

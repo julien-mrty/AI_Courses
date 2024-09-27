@@ -1,10 +1,6 @@
-import numpy as np
-import matplotlib.pyplot as plt
-
-
-""" 
+"""
 I) Supervised learning
-CHAPTER 3
+Chapter 3
 Generalized linear models
 """
 

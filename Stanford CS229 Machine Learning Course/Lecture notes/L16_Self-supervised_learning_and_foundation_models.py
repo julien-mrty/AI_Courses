@@ -1,14 +1,8 @@
-import numpy as np
-
-
 """
 IV) Unsupervised learning
 Chapter 14
 Self-supervised learning and foundation models
 """
-
-
-""" This is just a summary of the lecture, please refer to 'main notes 2022' for precisions. """
 
 
 """

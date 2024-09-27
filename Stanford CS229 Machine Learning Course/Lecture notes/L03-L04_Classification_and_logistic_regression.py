@@ -1,9 +1,9 @@
 import numpy as np
-import matplotlib.pyplot as plt
+
 
 """
 I) Supervised learning
-CHAPTER 2 :
+Chapter 2 :
 Classification and logistic regression
 """
 
