@@ -1,36 +1,58 @@
 """
 V) Reinforcement learning and control
-Chapter 16
-LQR, DDP and LQG
+Chapter 17
+Policy Gradient (REINFORCE)
 """
 
 
 """
-This section introduces finite-horizon Markov Decision Processes (MDPs) and builds on the concepts of value iteration 
-and the Bellman equation from previous chapters.
+Policy gradient method.
 
-Generalizing MDP Equations :
-- In a more general setting, the expectation over future states is used, denoted by E the expectations, instead of summing 
-  over discrete states, which works for both discrete and continuous cases.
+Key concepts :
+- In reinforcement learning, the goal is to find a policy that maximizes the cumulative reward.
+- A policy pi is a probability distribution over actions a_t given the current state s_t, parameterized by θ.
+- The policy gradient method updates θ in the direction of the gradient of the expected return J(θ).
 
-Finite Horizon MDPs :
-- The problem shifts from an infinite horizon (which used a discount factor γ to ensure convergence) to a finite horizon 
-  MDP, characterized by a time horizon T. In this setting, rewards are summed over the finite time steps, so no discount 
-  factor is needed.
-- Unlike infinite-horizon MDPs, the optimal policy in a finite-horizon MDP is generally non-stationary. This means the 
-  policy changes over time depending on the remaining time steps, leading to time-dependent transitions and rewards.
-  For instance if you have only one step iteration remaining, you will use greedy policy instead of long term 
-  expectations.
 
-Time-Dependent Dynamics :
-- Finite-horizon MDPs model real-world scenarios better, where things like resource availability and environmental 
-  conditions (ex : gas levels, traffic) can change over time. Therefore, both transitions and rewards become 
-  time-dependent.
+REINFORCE algorithm : 
+- REINFORCE is a model-free algorithm (don't need to know its environment, learn from reward it gets after each action) 
+  for policy optimization in reinforcement learning.
+- It directly optimizes a randomized policy.
+- The focus is on a finite horizon setting.
+
+- Learning without transition probability :
+    - It only assumes access to samples from transition probabilities and queries to the reward function, without requiring 
+      explicit knowledge of their analytical forms
+    - The algorithm learns the policy π_θ(a∣s), representing the probability of taking action a in state s based on 
+      parameter θ.
+      
+- Objective function :
+    - The goal is to optimize the expected total reward over a trajectory J(θ).
+    
+- Policy Gradient Estimation:
+    - To optimize J(θ) using gradient ascent, the algorithm needs to compute ∇J(θ) without knowing the form of the 
+      reward functon or transition probabilities.
+    - The gradient is estimated using the likelihood-ratio trick. Check the lecture notes from page 208.
+
+- The core of the REINFORCE algorithm is to update policy parameters based on sampled trajectories ∇_θ J(θ)
+- Intuitively, this means adjusting the policy to favor actions leading to high rewards while downplaying those leading 
+  to low rewards.
   
-Dynamic Programming and Bellman's Equation :
-- At the final time step T, the optimal value function is straightforward, computed as the max expected reward of the 
-  next action. For earlier time steps, the value function is computed recursively using Bellman's equation.
-- The process is solved iteratively, starting from the last time step and working backward to the initial state, 
-  ensuring the optimal value function and policy. So instead of choosing an initial state, you chose the final state and
-  run the Bellman equations from it.
+- The policy gradient formula (17.8, p209) :
+    - LHS : Represents how much the policy is to changes in the parameter θ for the action taken a_t given the state 
+      s_t. It shows how the probability of selecting action a_t would change when adjusting θ.
+    - RHS : Represents the total reward collected over the trajectory. It acts as a weight that indicates how rewarding 
+      this trajectory (or sequence of actions) was. If a trajectory has a high reward, we want to adjust the policy in 
+      the direction that makes it more likely to repeat this trajectory. Conversely, if a trajectory has a low reward, 
+      we don't want to emphasize actions that led to it as much.
+      
+- Equation (17.9, p210) :
+RHS = 1 refer to lecture's example
+E[LHS * RHS] = 0, if RHS = 1, or the policy is already maximized.
+This means that their is no more updates to make on order to optimized the policy. 
+As I understand, if the policy is already maximized, the derivative of the policy for state a is equal to 0 (top of the
+curve, already the most probable action to take, the gradient of the policy with respect to θ will be 0 at the optimal 
+point). 
+If the reward function is equal to one at all states, the mean (the expectation) of the update on theta is equal to 0 
+because no matter which action you take, you will end up on the state with a reward function equal to 1.
 """
