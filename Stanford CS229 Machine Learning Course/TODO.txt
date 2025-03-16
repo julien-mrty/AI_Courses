@@ -1,2 +1,4 @@
 - 6.2-8 Support Vector Machine, partie optionnelle non lu
 - 8.3 Sample complexity bounds, partie optionnelle non lu
+
+Currently  : p197
